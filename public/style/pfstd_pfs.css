@@ -1,0 +1,33 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #bbdefa; /* เปลี่ยนสีพื้นหลังตามที่ต้องการ */
+    border-bottom: 1px solid #ccc;
+}
+
+.logo img {
+    height: 50px; /* ขนาดโลโก้ */
+}
+.account-icon {
+    padding: 10px; /* เพิ่มระยะห่างภายใน */
+}
+
+.account-icon a {
+    font-size: 30px; /* ขนาดไอคอน */
+    color: #ffffff; /* สีไอคอน */
+    text-decoration: none; /* ไม่มีขีดเส้นใต้ */
+    margin: 5px; /* เพิ่มระยะห่างภายนอก */
+}
+
+.account-icon a:hover {
+    color: #23617e; /* เปลี่ยนสีเมื่อวางเมาส์ */
+}

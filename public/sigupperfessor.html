@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account</title>
+  <!-- <link rel="stylesheet" href="signupstd_pfs.css"> -->
+  <link rel="stylesheet" href="style/signupstd_pfs.css">
+</head>
+
+<body>
+  <script src="/script.js"></script>
+  <div class="container">
+    <div class="background">
+      <img src="assets/thaksinlogo.jpg" alt="background">
+    </div>
+
+    <div class="form-container">
+
+      <form id="createAccountForm" action="#" method="POST">
+        <h1>CREATE ACCOUNT !</h1>
+
+        <div class="input-group">
+          <input type="text" id="Name" placeholder="ชื่อ-นามสกุล" required>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="Username" placeholder="ชื่อผู้ใช่" required>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="Password" placeholder="รหัสผ่าน" required>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="Email" placeholder="email@tsu.ac.th" required>
+        </div>
+
+        <div class="input-group">
+          <input type="tel" id="Phone" placeholder="เบอร์โทรศัพท์" required>
+        </div>
+
+        <!-- <div class="input-group">
+          <select id="Institude">
+            <option value="">เลือกหน่วยงาน</option>
+            <option value="หน่วยงานอิสระ">หน่วยงานอิสระ</option>
+            <option value="สำนักงานสภามหาวิทยาลัย">สำนักงานสภามหาวิทยาลัย</option>
+            <option value="สำนักงานมหาวิทยาลัย">สำนักงานมหาวิทยาลัย</option>
+            <option value="สำนักงานวิทยาเขต">สำนักงานวิทยาเขต</option>
+            <option value="ส่วนงานอื่นๆ">ส่วนงานอื่นๆ</option>
+            <option value="องค์กร/โครงการ/กิจกรรม">องค์กร/โครงการ/กิจกรรม</option>
+            <option value="เว็บไซต์หน่วยงานเดิม">เว็บไซต์หน่วยงานเดิม</option>
+          </select>
+        </div> -->
+
+        <div class="input-group">
+          <select id="Faculty">
+            <option value="">เลือกคณะ</option>
+            <option value="คณะวิทยาศาสตร์และนวัตกรรมดิจิทัล">คณะวิทยาศาสตร์และนวัตกรรมดิจิทัล</option>
+            <option value="คณะวิทยาการสุขภาพและการกีฬา">คณะวิทยาการสุขภาพและการกีฬา</option>
+            <option value="คณะเทคโนโลยีและการพัฒนาชุมชน">คณะเทคโนโลยีและการพัฒนาชุมชน</option>
+            <option value="คณะวิศวกรรมศาสตร์">คณะวิศวกรรมศาสตร์</option>
+            <option value="คณะพยาบาลศาสตร์">คณะพยาบาลศาสตร์</option>
+            <option value="คณะนิติศาสตร์">คณะนิติศาสตร์</option>
+            <option value="คณะอุตสาหกรรมเกษตรและชีวภาพ">คณะอุตสาหกรรมเกษตรและชีวภาพ</option>
+            <option value="คณะศึกษาศาสตร์">คณะศึกษาศาสตร์</option>
+            <option value="คณะสหวิทยาการและการประกอบการ">คณะสหวิทยาการและการประกอบการ</option>
+          </select>
+        </div>
+
+        <div class="button-group">
+          <button type="button" onclick="goBack()">ย้อนกลับ</button>
+          <button type="submit">ต่อไป</button>
+        </div>
+      </form>
+
+      <script>
+        document.getElementById('createAccountForm').addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          const Name = document.getElementById('Name').value;
+          const Email = document.getElementById('Email').value;
+          const Username = document.getElementById('Username').value;
+          const Phone = document.getElementById('Phone').value;
+          const Password = document.getElementById('Password').value;
+          const Faculty = document.getElementById('Faculty').value;
+
+          if (Name && Email && Username && Phone && Password && Faculty) {
+            try {
+              const response = await fetch('http://localhost:3005/api/prof/register', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ Name, Email, Username, Phone, Password, Faculty }),
+              });
+
+              if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Server Error:', errorText);
+                alert('Error registering user: ' + errorText);
+              } else {
+                alert('User registered successfully!');
+                window.location.href = 'webperfessor.html'; // Redirect on success
+              }
+            } catch (error) {
+              console.error('Fetch Error:', error);
+              alert('Error: ' + error.message);
+            }
+          } else {
+            alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+          }
+        });
+        function goBack() {
+      window.history.back();
+      }
+      </script>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

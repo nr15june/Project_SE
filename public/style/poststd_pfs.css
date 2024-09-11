@@ -1,0 +1,98 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #bbdefa;
+    /* เปลี่ยนสีพื้นหลังตามที่ต้องการ */
+    border-bottom: 1px solid #ffffff;
+}
+
+.logo img {
+    height: 50px;
+    /* ขนาดโลโก้ */
+}
+
+.account-icon {
+    padding: 10px;
+    /* เพิ่มระยะห่างภายใน */
+}
+
+.account-icon a {
+    font-size: 30px;
+    /* ขนาดไอคอน */
+    color: #ffffff;
+    /* สีไอคอน */
+    text-decoration: none;
+    /* ไม่มีขีดเส้นใต้ */
+    margin: 5px;
+    /* เพิ่มระยะห่างภายนอก */
+}
+
+.account-icon a:hover {
+    color: #23617e;
+    /* เปลี่ยนสีเมื่อวางเมาส์ */
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.post-form {
+    background-color: #ffffff;
+    /* border: 1px solid #c4c4c4; */
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.post-form h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4fc3f7;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 45%;
+}
+
+button:hover {
+    background-color: #0288d1;
+}
