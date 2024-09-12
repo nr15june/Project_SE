@@ -80,6 +80,41 @@ app.use("/api/stu", studentRoutes);
 app.use("/api/postProf", postProfRoutes);
 app.use("/api/postStu", postStuRoutes);
 
+// //add Get Collection PostStu
+// app.get('/api/postStu', async (req, res) => {
+//     try {
+//         const posts = await Post.aggregate([
+//             {
+//                 $lookup: {
+//                     from: "Student",  // ชื่อของคอลเลกชันผู้ใช้
+//                     localField: "_id",  // ฟิลด์ `_id` ในคอลเลกชัน `postStu`
+//                     foreignField: "_id",  // ฟิลด์ `_id` ในคอลเลกชันผู้ใช้
+//                     as: "user_info"  // ชื่อฟิลด์ใหม่สำหรับรวมข้อมูลผู้ใช้
+//                 }
+//             },
+//             {
+//                 $unwind: "$user_info"  // แยกข้อมูลผู้ใช้ให้เป็นแถวเดียวกัน
+//             },
+//             {
+//                 $project: {  // เลือกเฉพาะฟิลด์ที่ต้องการส่งออก
+//                     _id: 1,
+//                     St_skill: 1,
+//                     St_ability: 1,
+//                     St_work_time: 1,
+//                     "user_info.Name": 1,
+//                     "user_info.Email": 1
+//                 }
+//             }
+//         ]);
+//         res.json(posts);
+//     } catch (error) {
+//         res.status(500).send('Error fetching posts');
+//     }
+// });
+
+
+
 // Start server
+
 const port = process.env.PORT || 3005;
 app.listen(port, () => console.log(`Server running on port ${port}`));

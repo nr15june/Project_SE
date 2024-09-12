@@ -138,6 +138,21 @@
                         console.error('Server Error:', errorText);
                         alert('เกิดข้อผิดพลาดในการโพสต์งาน: ' + errorText);
                     } else {
+
+                        //local Storage
+                        localStorage.setItem('Job_title', Job_title);
+                        localStorage.setItem('Job_description', Job_description);
+                        localStorage.setItem('Job_location', Job_location);
+                        localStorage.setItem('Job_building', Job_building);
+                        localStorage.setItem('Job_room', Job_room);
+                        localStorage.setItem('Job_time_start', Job_time_start);
+                        localStorage.setItem('Job_time_end', Job_time_end);
+                        localStorage.setItem('Count', Count);
+                        localStorage.setItem('Reserve_count', Reserve_count);
+                        localStorage.setItem('Traveling_type', Traveling_type);
+                        localStorage.setItem('Food_Sup', Food_Sup);
+                        localStorage.setItem('Salary', Salary);
+                        
                         alert('โพสต์งานสำเร็จ!');
                         window.location.href = '/public/webperfessor.html'; // เปลี่ยนเส้นทางเมื่อสำเร็จ
                     }

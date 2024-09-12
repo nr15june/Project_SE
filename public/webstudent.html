@@ -84,29 +84,34 @@
                 // ลบโพสต์ที่เคยมีออกไป
                 postsContainer.innerHTML = '';
 
-                // วนลูปผ่านโพสต์ทั้งหมดและสร้าง HTML สำหรับแต่ละโพสต์
+                const name = localStorage.getItem('ProfName');
+                const email = localStorage.getItem('ProfEmail');
+
+                // วนลูปแสดงผลข้อมูลที่ได้จาก API และ localStorage
                 posts.forEach(post => {
                     const postElement = document.createElement('div');
                     postElement.className = 'post-item'; // สร้างคลาสสำหรับสไตล์
 
-                    // สร้าง Container สำหรับข้อมูลแต่ละส่วนของโพสต์
                     postElement.innerHTML = `
-                        <div class="post-box">
-                            <h3>${post.Job_title}</h3>
-                            <p>${post.Job_description}</p>
-                            <div class="post-location">
-                            <p><strong>สถานที่:</strong> ${post.Job_location} ${post.Job_building ? ' อาคาร: ' + post.Job_building : ''} ${post.Job_room ? ' ห้อง: ' + post.Job_room : ''}</p>
-                        </div>
-                        <div class="post-time">
-                            <p><strong>เวลา:</strong> ${post.Job_time_start} - ${post.Job_time_end}</p>
-                        </div>
-                        <div class="post-salary">
-                            <p><strong>ค่าตอบแทน:</strong> ${post.Salary}</p>
-                        </div>
-                        </div>
-                        
-                    `;
+        <div class="post-box">
+            <h3>ชื่อ: ${name}</h3>
+            <p>อีเมล: ${email}</p>
+            <h3>${post.Job_title}</h3>
+            <p>${post.Job_description}</p>
+            <div class="post-location">
+                <p><strong>สถานที่:</strong> ${post.Job_location} ${post.Job_building ? ' อาคาร: ' + post.Job_building : ''} ${post.Job_room ? ' ห้อง: ' + post.Job_room : ''}</p>
+            </div>
+            <div class="post-time">
+                <p><strong>เวลา:</strong> ${post.Job_time_start} - ${post.Job_time_end}</p>
+            </div>
+            <div class="post-salary">
+                <p><strong>ค่าตอบแทน:</strong> ${post.Salary}</p>
+            </div>
+        </div>
+    `;
                     postsContainer.appendChild(postElement);
+
+
                 });
             } catch (error) {
                 console.error('Error:', error);

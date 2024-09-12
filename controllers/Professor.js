@@ -6,37 +6,38 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 //register (POST)
-exports.registerProf = async (req,res) => {
+exports.registerProf = async (req, res) => {
     const {
-        Name,
-        //Last_Name,
-        Email,
+        ProfName,
+        ProfEmail,
         Username,
-        Phone,
+        ProfPhone,
         Password,
-        //Institude,
-        Faculty,
-        //Profile,
+        Prof_Faculty,
     } = req.body;
+
+    console.log({ ProfName, ProfEmail, Username, ProfPhone, Password, Prof_Faculty }); // ล็อกข้อมูลที่ได้รับ
+
     try {
-        const hashPass = await bcrypt.hash(Password,10);
-        const prof = new Prof ({
-            Name,
-            Email,
+        const hashPass = await bcrypt.hash(Password, 10);
+        const prof = new Prof({
+            ProfName,
+            ProfEmail,
             Username,
-            Phone,
-            Password : hashPass,
-            //Institude,
-            Faculty,
-            //Profile,
-        })
+            ProfPhone,
+            Password: hashPass,
+            Prof_Faculty,
+        });
+
         await prof.save();
         res.status(201).send("User registered");
-        console.log({ prof })
+        console.log({ prof });
     } catch (error) {
+        console.error('Registration Error:', error); // ล็อกข้อผิดพลาด
         res.status(400).send(error.message);
     }
 }
+
 
 //login (POST)
 exports.loginProf = async (req,res) => {

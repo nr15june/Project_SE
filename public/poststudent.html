@@ -72,6 +72,10 @@
                     console.error('Server Error:', errorText);
                     alert('เกิดข้อผิดพลาดในการโพสต์: ' + errorText);
                 } else {
+                    localStorage.setItem('St_skill', skills);
+                    localStorage.setItem('St_ability', abilities);
+                    localStorage.setItem('St_work_time', availability);
+                    
                     alert('โพสต์สำเร็จ!');
                     window.location.href = '/public/webstudent.html'; // เปลี่ยนเส้นทางเมื่อสำเร็จ
                 }

@@ -18,7 +18,7 @@
             </a>
         </div>
         <div class="account-icon">
-            <a href="/public/pfstudent.html">
+            <a href="/public/pfperfessor.html">
                 <i class="fas fa-user-circle"></i> <!-- ใช้ไอคอนที่ต้องการ -->
             </a>
         </div>
@@ -27,11 +27,6 @@
     <div class="container">
         <!-- คอนเทนต์หลัก -->
         <main class="main-content">
-            <!-- ข้อมูลผู้ใช้ -->
-            <div class="user-info" id="user-info">
-                <!-- จะแสดงข้อมูลผู้ใช้ที่ดึงมาจาก signupstudent -->
-            </div>
-
             <!-- กล่องโพสต์คล้ายเฟสบุ๊ค -->
             <div class="post-box" id="create-post-box">
                 <textarea rows="4" placeholder="โพสต์....."></textarea>
@@ -77,49 +72,31 @@
 
     <script src="scripts.js"></script>
     <script>
-        // ฟังก์ชันดึงข้อมูลผู้ใช้จาก API และแสดงผล
-        async function fetchUserInfo() {
-            try {
-                const response = await fetch('http://localhost:3005/api/signupstudent');
-                if (!response.ok) {
-                    throw new Error('Error fetching user info');
-                }
-                const user = await response.json();
-                const userInfo = document.getElementById('user-info');
-
-                // แสดงข้อมูลผู้ใช้
-                userInfo.innerHTML = `
-                    <h2>ข้อมูลผู้ใช้</h2>
-                    <p>ชื่อ: ${user.Name}</p>
-                    <p>อีเมล: ${user.Email}</p>
-                `;
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-
-        // ฟังก์ชันดึงข้อมูลโพสต์จาก API และแสดงผล
         async function fetchPosts() {
             try {
-                const response1 = await fetch('http://localhost:3005/api/postStu');
-                const response2 = await fetch('http://localhost:3005/api/signupstudent');
+                const response = await fetch('http://localhost:3005/api/postStu');
                 if (!response.ok) {
                     throw new Error('Error fetching posts');
                 }
                 const posts = await response.json();
                 const postsContainer = document.getElementById('posts-container');
-
+    
                 // ลบโพสต์ที่เคยมีออกไป
                 postsContainer.innerHTML = '';
-
+    
+                // ดึงข้อมูล Name และ Email จาก localStorage
+                const name = localStorage.getItem('Name') ;
+                const email = localStorage.getItem('Email');
+    
                 // วนลูปผ่านโพสต์ทั้งหมดและสร้าง HTML สำหรับแต่ละโพสต์
                 posts.forEach(post => {
                     const postElement = document.createElement('div');
                     postElement.className = 'post-item'; // สร้างคลาสสำหรับสไตล์
-
-                    // สร้าง Container สำหรับข้อมูลแต่ละส่วนของโพสต์
+    
                     postElement.innerHTML = `
                         <div class="post-box">
+                            <h3>ชื่อ: ${name}</h3>
+                            <p>อีเมล: ${email}</p>
                             <h3>ทักษะ: ${post.St_skill}</h3>
                             <p>ความสามารถ: ${post.St_ability}</p>
                             <p>เวลาที่ทำงานได้: ${post.St_work_time}</p>
@@ -131,13 +108,11 @@
                 console.error('Error:', error);
             }
         }
-
+    
         // เรียกใช้ฟังก์ชันเมื่อโหลดหน้าเสร็จ
-        window.onload = function() {
-            fetchUserInfo(); // ดึงข้อมูลผู้ใช้
-            fetchPosts();    // ดึงข้อมูลโพสต์
-        };
+        window.onload = fetchPosts;
     </script>
+    
 </body>
 
 </html>

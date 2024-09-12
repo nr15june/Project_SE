@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Student Account</title>
   <link rel="stylesheet" href="style/signupstd_pfs.css">
 </head>
+
 <body>
   <div class="container">
     <div class="background">
@@ -110,7 +112,7 @@
         '-',
       ],
       'คณะนิติศาสตร์': [
-      '-',
+        '-',
       ],
       'คณะอุตสาหกรรมเกษตรและชีวภาพ': [
         'สาขาวิทยาศาสตร์และเทคโนโลยีอาหาร ',
@@ -161,55 +163,66 @@
     }
 
     document.getElementById('createAccountForm').addEventListener('submit', async function (e) {
-  e.preventDefault();
+      e.preventDefault();
 
-  const Name = document.getElementById('Name').value;
-  const Username = document.getElementById('Username').value;
-  const Password = document.getElementById('Password').value;
-  const Email = document.getElementById('Email').value;
-  const Phone = document.getElementById('Phone').value;
-  const Faculty = document.getElementById('faculty').value;
-  const Major = document.getElementById('majors').value;
-  const Sex = document.getElementById('Sex').value;
-  const Year_of_study = document.getElementById('Year_of_study').value;
+      const Name = document.getElementById('Name').value;
+      const Email = document.getElementById('Email').value;
+      
+      const Username = document.getElementById('Username').value;
+      const Password = document.getElementById('Password').value;
+      const Phone = document.getElementById('Phone').value;
+      const Faculty = document.getElementById('faculty').value;
+      const Major = document.getElementById('majors').value;
+      const Sex = document.getElementById('Sex').value;
+      const Year_of_study = document.getElementById('Year_of_study').value;
 
-  if (Name && Username && Password && Email && Phone && Faculty && Major && Sex && Year_of_study) {
-    try {
-      const response = await fetch('http://localhost:3005/api/stu/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({  
-          Name,
-          Username,
-          Password,
-          Email,
-          Phone,
-          Faculty,
-          Program: Major,
-          Sex,
-          Year_of_study
-        }),
-      });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Server Error:', errorText);
-        alert('Error registering user: ' + errorText);
+
+      if (Name && Username && Password && Email && Phone && Faculty && Major && Sex && Year_of_study) {
+        try {
+          const response = await fetch('http://localhost:3005/api/stu/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              Name,
+              Username,
+              Password,
+              Email,
+              Phone,
+              Faculty,
+              Program: Major,
+              Sex,
+              Year_of_study
+            }),
+          });
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Server Error:', errorText);
+            alert('Error registering user: ' + errorText);
+          } else {
+            // Save user data to localStorage
+            localStorage.setItem('Name', Name);
+            localStorage.setItem('Email', Email);
+            localStorage.setItem('Phone', Phone);
+            localStorage.setItem('Faculty', Faculty);
+            localStorage.setItem('Program', Major);
+            localStorage.setItem('Sex', Sex);
+            localStorage.setItem('Year_of_study', Year_of_study);
+            alert('User registered successfully!');
+            window.location.href = 'webstudent.html'; // Redirect on success
+          }
+        } catch (error) {
+          console.error('Fetch Error:', error);
+          alert('Error: ' + error.message);
+        }
       } else {
-        alert('User registered successfully!');
-        window.location.href = 'webstudent.html'; // Redirect on success
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
       }
-    } catch (error) {
-      console.error('Fetch Error:', error);
-      alert('Error: ' + error.message);
-    }
-  } else {
-    alert('กรุณากรอกข้อมูลให้ครบถ้วน');
-  }
-});
-
+    });
   </script>
 </body>
+
 </html>
