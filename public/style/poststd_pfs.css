@@ -48,51 +48,76 @@ html {
 
 .post-form {
     background-color: #ffffff;
-    /* border: 1px solid #c4c4c4; */
     border-radius: 8px;
-    padding: 20px;
-    max-width: 600px;
+    width: 700px;
+    /* ขยายความกว้างของกล่อง */
     margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    /* เพิ่ม Padding ให้มากขึ้น */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    /* เพิ่มเงาให้เด่นขึ้น */
 }
 
 .post-form h2 {
     margin-top: 0;
-    font-size: 24px;
+    font-size: 28px;
+    /* เพิ่มขนาดตัวอักษรของหัวข้อ */
     color: #333;
+    text-align: center;
+    /* จัดให้อยู่กึ่งกลาง */
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    /* เพิ่มระยะห่างระหว่างกลุ่มของฟอร์ม */
 }
 
 .form-group label {
     display: block;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    /* เพิ่มระยะห่างระหว่าง label และ input */
     color: #333;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 10px;
+.form-group input,
+.form-group textarea {
+    width: 100%; /* กว้างเท่ากับกล่องฟอร์ม */
+    padding: 15px; /* ขนาด padding */
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    border-radius: 6px;
+    box-sizing: border-box; /* รวม padding และ border ในความกว้าง */
+    font-size: 16px; /* ขนาดตัวอักษร */
+}
+
+.form-group textarea {
+    height: 100px; /* ความสูงของ textarea */
+    resize: none; /* อนุญาตให้ปรับขนาดเฉพาะแนวตั้ง */
+}
+
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    /* จัดปุ่มให้ห่างกัน */
+    margin-top: 20px;
 }
 
 button {
-    background-color: #4fc3f7;
+    background-color: #81b4dd;
     color: white;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 15px 30px;
+    /* เพิ่มขนาดปุ่ม */
+    font-size: 18px;
     font-weight: bold;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    width: 45%;
+    text-align: center;
 }
 
 button:hover {
-    background-color: #0288d1;
+    background-color: #487288;
 }

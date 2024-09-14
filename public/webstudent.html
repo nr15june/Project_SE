@@ -57,7 +57,7 @@
                 <!-- สาขาจะถูกเพิ่มโดย JavaScript -->
             </select>
 
-            <select id="filter-agency">
+            <!-- <select id="filter-agency">
                 <option value="">เลือกหน่วยงาน</option>
                 <option value="หน่วยงานอิสระ">หน่วยงานอิสระ</option>
                 <option value="สำนักงานสภามหาวิทยาลัย">สำนักงานสภามหาวิทยาลัย</option>
@@ -66,57 +66,65 @@
                 <option value="ส่วนงานอื่นๆ">ส่วนงานอื่นๆ</option>
                 <option value="องค์กร/โครงการ/กิจกรรม">องค์กร/โครงการ/กิจกรรม</option>
                 <option value="เว็บไซต์หน่วยงานเดิม">เว็บไซต์หน่วยงานเดิม</option>
-            </select>
+            </select> -->
         </aside>
     </div>
     <script src="scriptss.js"></script> <!-- ใส่ path ที่ถูกต้องสำหรับไฟล์ JavaScript -->
     <script>
         // ฟังก์ชันดึงข้อมูลโพสต์จาก API และแสดงผล
-        async function fetchPosts() {
-            try {
-                const response = await fetch('http://localhost:3005/api/postProf'); // ปรับ URL ตาม API ของคุณ
-                if (!response.ok) {
-                    throw new Error('Error fetching posts');
-                }
-                const posts = await response.json();
-                const postsContainer = document.getElementById('posts-container');
-
-                // ลบโพสต์ที่เคยมีออกไป
-                postsContainer.innerHTML = '';
-
-                const name = localStorage.getItem('ProfName');
-                const email = localStorage.getItem('ProfEmail');
-
-                // วนลูปแสดงผลข้อมูลที่ได้จาก API และ localStorage
-                posts.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.className = 'post-item'; // สร้างคลาสสำหรับสไตล์
-
-                    postElement.innerHTML = `
-        <div class="post-box">
-            <h3>ชื่อ: ${name}</h3>
-            <p>อีเมล: ${email}</p>
-            <h3>${post.Job_title}</h3>
-            <p>${post.Job_description}</p>
-            <div class="post-location">
-                <p><strong>สถานที่:</strong> ${post.Job_location} ${post.Job_building ? ' อาคาร: ' + post.Job_building : ''} ${post.Job_room ? ' ห้อง: ' + post.Job_room : ''}</p>
-            </div>
-            <div class="post-time">
-                <p><strong>เวลา:</strong> ${post.Job_time_start} - ${post.Job_time_end}</p>
-            </div>
-            <div class="post-salary">
-                <p><strong>ค่าตอบแทน:</strong> ${post.Salary}</p>
-            </div>
-        </div>
-    `;
-                    postsContainer.appendChild(postElement);
-
-
-                });
-            } catch (error) {
-                console.error('Error:', error);
-            }
+        // ฟังก์ชันดึงข้อมูลโพสต์จาก API และแสดงผล
+async function fetchPosts() {
+    try {
+        const response = await fetch('http://localhost:3005/api/postProf'); // ปรับ URL ตาม API ของคุณ
+        if (!response.ok) {
+            throw new Error('Error fetching posts');
         }
+        const posts = await response.json();
+        const postsContainer = document.getElementById('posts-container');
+
+        // ลบโพสต์ที่เคยมีออกไป
+        postsContainer.innerHTML = '';
+
+        const name = localStorage.getItem('ProfName');
+        const email = localStorage.getItem('ProfEmail');
+
+        // เรียงโพสต์ตามวันที่หรือเวลา จากใหม่สุดไปเก่าสุด
+        posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        // วนลูปแสดงผลข้อมูลที่ได้จาก API และ localStorage
+        posts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.className = 'post-item'; // สร้างคลาสสำหรับสไตล์
+
+            postElement.innerHTML = `
+                <div class="post-box">
+                    <div class="post-box-header">
+                        <p>${post.ApplicantsCount} / ${post.MaxApplicants}</p>
+                    </div>
+                    <h3>ชื่อ: ${name}</h3>
+                    <p>อีเมล: ${email}</p>
+                    <h3>${post.Job_title}</h3>
+                    <p>${post.Job_description}</p>
+                    <div class="post-location">
+                        <p><strong>สถานที่:</strong> ${post.Job_location} ${post.Job_building ? ' อาคาร: ' + post.Job_building : ''} ${post.Job_room ? ' ห้อง: ' + post.Job_room : ''}</p>
+                    </div>
+                    <div class="post-time">
+                        <p><strong>เวลา:</strong> ${post.Job_time_start} - ${post.Job_time_end}</p>
+                    </div>
+                    <div class="post-salary">
+                        <p><strong>ค่าตอบแทน:</strong> ${post.Salary}</p>
+                    </div>
+                    <!-- ปุ่มสมัคร -->
+                    <button class="post-button">สมัคร</button>
+                </div>
+            `;
+            postsContainer.appendChild(postElement);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
 
         // เรียกใช้ฟังก์ชันเมื่อโหลดหน้าเสร็จ
         window.onload = fetchPosts;

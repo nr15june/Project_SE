@@ -111,3 +111,26 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = 'postperfessor.html'; // เปลี่ยนเส้นทางไปยังหน้าที่ต้องการ
     });
 });
+
+
+// //ปุ่มลบแก้ไขของนิสิต
+// function toggleMenu(icon) {
+//     const menu = icon.nextElementSibling;
+//     if (menu.style.display === 'block') {
+//         menu.style.display = 'none';
+//     } else {
+//         menu.style.display = 'block';
+//     }
+// }
+
+// function editPost() {
+//     alert("คุณต้องการแก้ไขโพสต์นี้");
+//     // เพิ่มฟังก์ชันสำหรับการแก้ไขโพสต์ที่นี่
+// }
+
+// function deletePost() {
+//     if (confirm("คุณต้องการลบโพสต์นี้ใช่หรือไม่?")) {
+//         alert("โพสต์นี้ถูกลบแล้ว");
+//         // เพิ่มฟังก์ชันสำหรับการลบโพสต์ที่นี่
+//     }
+// }

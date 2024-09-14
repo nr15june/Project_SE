@@ -13,7 +13,7 @@
     <!-- แถบด้านบน -->
     <header class="header">
         <div class="logo">
-            <a href="/public/webstudent.html">
+            <a href="/public/webperfessor.html">
                 <img src="assets/logo.jpg" alt="logo" class="profile-picture">
             </a>
         </div>
@@ -57,7 +57,7 @@
                 <!-- สาขาจะถูกเพิ่มโดย JavaScript -->
             </select>
 
-            <select id="filter-agency">
+            <!-- <select id="filter-agency">
                 <option value="">เลือกหน่วยงาน</option>
                 <option value="หน่วยงานอิสระ">หน่วยงานอิสระ</option>
                 <option value="สำนักงานสภามหาวิทยาลัย">สำนักงานสภามหาวิทยาลัย</option>
@@ -66,7 +66,7 @@
                 <option value="ส่วนงานอื่นๆ">ส่วนงานอื่นๆ</option>
                 <option value="องค์กร/โครงการ/กิจกรรม">องค์กร/โครงการ/กิจกรรม</option>
                 <option value="เว็บไซต์หน่วยงานเดิม">เว็บไซต์หน่วยงานเดิม</option>
-            </select>
+            </select> -->
         </aside>
     </div>
 
@@ -80,19 +80,22 @@
                 }
                 const posts = await response.json();
                 const postsContainer = document.getElementById('posts-container');
-    
+
                 // ลบโพสต์ที่เคยมีออกไป
                 postsContainer.innerHTML = '';
-    
+
                 // ดึงข้อมูล Name และ Email จาก localStorage
-                const name = localStorage.getItem('Name') ;
+                const name = localStorage.getItem('Name');
                 const email = localStorage.getItem('Email');
-    
+
+                // เรียงโพสต์ตามวันที่หรือเวลา จากใหม่สุดไปเก่าสุด
+                posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
                 // วนลูปผ่านโพสต์ทั้งหมดและสร้าง HTML สำหรับแต่ละโพสต์
                 posts.forEach(post => {
                     const postElement = document.createElement('div');
                     postElement.className = 'post-item'; // สร้างคลาสสำหรับสไตล์
-    
+
                     postElement.innerHTML = `
                         <div class="post-box">
                             <h3>ชื่อ: ${name}</h3>
@@ -108,11 +111,11 @@
                 console.error('Error:', error);
             }
         }
-    
+
         // เรียกใช้ฟังก์ชันเมื่อโหลดหน้าเสร็จ
         window.onload = fetchPosts;
     </script>
-    
+
 </body>
 
 </html>

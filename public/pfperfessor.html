@@ -25,28 +25,45 @@
     </header>
 
     <!-- Section to display user information -->
-    <section class="user-info">
-        <h2>ข้อมูลผู้ใช้</h2>
-        <p><strong>ชื่อ-นามสกุล:</strong> <span id="displayProfName"></span></p>
-        <p><strong>Email:</strong> <span id="displayProfEmail"></span></p>
-        <p><strong>เบอร์โทรศัพท์:</strong> <span id="displayProfPhone"></span></p>
-        <p><strong>คณะ:</strong> <span id="displayProfFaculty"></span></p>
-    </section>
-    <section class="post-info">
-        <h2>รายละเอียดโพสต์</h2>
-        <p><strong>ชื่องาน:</strong> <span id="displayJobTitle"></span></p>
-        <p><strong>รายละเอียด:</strong> <span id="displayJobDescription"></span></p>
-        <p><strong>สถานที่:</strong> <span id="displayJobLocation"></span></p>
-        <p><strong>อาคาร:</strong> <span id="displayJobBuilding"></span></p>
-        <p><strong>ห้อง:</strong> <span id="displayJobRoom"></span></p>
-        <p><strong>เวลาที่เริ่ม:</strong> <span id="displayJobTimeStart"></span></p>
-        <p><strong>เวลาที่สิ้นสุด:</strong> <span id="displayJobTimeEnd"></span></p>
-        <p><strong>จำนวนที่รับ:</strong> <span id="displayCount"></span></p>
-        <p><strong>จำนวนสำรอง:</strong> <span id="displayReserveCount"></span></p>
-        <p><strong>การเดินทาง:</strong> <span id="displayTravelingType"></span></p>
-        <p><strong>อาหาร:</strong> <span id="displayFoodSup"></span></p>
-        <p><strong>ค่าตอบแทน:</strong> <span id="displaySalary"></span></p>
-    </section>
+    <main class="main-content">
+        <div class="student-name">
+            <h2>ข้อมูลผู้ใช้</h2>
+            <p><strong>ชื่อ-นามสกุล:</strong> <span id="displayProfName"></span></p>
+        </div>
+        <div class="info-container">
+            <div class="user-info">
+                <p><strong>Email:</strong> <span id="displayProfEmail"></span></p>
+                <p><strong>เบอร์โทรศัพท์:</strong> <span id="displayProfPhone"></span></p>
+                <p><strong>คณะ:</strong> <span id="displayProfFaculty"></span></p>
+            </div>
+            <div class="post-container">
+                <!-- <h2>รายละเอียดโพสต์</h2> -->
+                <div class="post-box">
+                    <div class="post-header">
+                        <div class="kebab-menu">
+                            <i class="fas fa-ellipsis-v" onclick="toggleMenu(this)"></i>
+                            <ul class="menu-options">
+                                <li onclick="editPost()">แก้ไข</li>
+                                <li onclick="deletePost()">ลบ</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p><strong>ชื่องาน:</strong> <span id="displayJobTitle"></span></p>
+                    <p><strong>รายละเอียด:</strong> <span id="displayJobDescription"></span></p>
+                    <p><strong>สถานที่:</strong> <span id="displayJobLocation"></span></p>
+                    <p><strong>อาคาร:</strong> <span id="displayJobBuilding"></span></p>
+                    <p><strong>ห้อง:</strong> <span id="displayJobRoom"></span></p>
+                    <p><strong>เวลาที่เริ่ม:</strong> <span id="displayJobTimeStart"></span></p>
+                    <p><strong>เวลาที่สิ้นสุด:</strong> <span id="displayJobTimeEnd"></span></p>
+                    <p><strong>จำนวนที่รับ:</strong> <span id="displayCount"></span></p>
+                    <p><strong>จำนวนสำรอง:</strong> <span id="displayReserveCount"></span></p>
+                    <p><strong>การเดินทาง:</strong> <span id="displayTravelingType"></span></p>
+                    <p><strong>อาหาร:</strong> <span id="displayFoodSup"></span></p>
+                    <p><strong>ค่าตอบแทน:</strong> <span id="displaySalary"></span></p>
+                </div>
+            </div>
+        </div>
+    </main>
     <script>
         // Retrieve data from localStorage and display it on the page
         document.getElementById('displayProfName').textContent = localStorage.getItem('ProfName') || 'N/A';
@@ -66,6 +83,27 @@
         document.getElementById('displayTravelingType').textContent = localStorage.getItem('Traveling_type') || 'N/A';
         document.getElementById('displayFoodSup').textContent = localStorage.getItem('Food_Sup') || 'N/A';
         document.getElementById('displaySalary').textContent = localStorage.getItem('Salary') || 'N/A';
+
+        function toggleMenu(icon) {
+            const menu = icon.nextElementSibling;
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+
+        function editPost() {
+            alert("คุณต้องการแก้ไขโพสต์นี้");
+            // เพิ่มฟังก์ชันสำหรับการแก้ไขโพสต์ที่นี่
+        }
+
+        function deletePost() {
+            if (confirm("คุณต้องการลบโพสต์นี้ใช่หรือไม่?")) {
+                alert("โพสต์นี้ถูกลบแล้ว");
+                // เพิ่มฟังก์ชันสำหรับการลบโพสต์ที่นี่
+            }
+        }
     </script>
 </body>
 

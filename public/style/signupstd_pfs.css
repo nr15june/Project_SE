@@ -29,13 +29,10 @@ html {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 500px;
-  /* ขนาดกว้างของกล่อง */
-  max-height: 80%;
-  /* ความสูงสูงสุด */
-  /*overflow-y: scroll;  ทำให้เลื่อนได้ตลอดเมื่อยาวเกิน */
+  width: 500px; /* ขนาดกว้างของกล่อง */
+  max-height: 80%; /* ความสูงสูงสุด */
+  overflow-y: auto; /* ทำให้เลื่อนได้เมื่อเนื้อหายาวเกินไป */
 }
-
 
 h1 {
   font-size: 25px;
@@ -67,10 +64,11 @@ h1 {
 .button-group {
   display: flex;
   justify-content: space-between;
+  margin-top: 20px; /* เพิ่มช่องว่างระหว่างฟอร์มและปุ่ม */
 }
 
 button {
-  background-color: #4fc3f7;
+  background-color: #81b4dd;
   color: white;
   padding: 10px 20px;
   font-size: 16px;
@@ -82,5 +80,5 @@ button {
 }
 
 button:hover {
-  background-color: #0288d1;
+  background-color: #487288;
 }

@@ -40,19 +40,28 @@
                     <label for="availability">เวลาที่ทำงานได้:</label>
                     <input type="text" id="availability" name="availability" placeholder="ระบุเวลาที่คุณสามารถทำงานได้">
                 </div>
-                <button type="submit" class="submit-button">โพสต์</button>
+                <div class="button-container">
+                    <button type="submit" class="submit-button">โพสต์</button>
+                </div>
             </form>
         </div>
     </main>
 
     <script>
         // การส่งแบบฟอร์มโพสต์ข้อมูลไปยังเซิร์ฟเวอร์
+        // การส่งแบบฟอร์มโพสต์ข้อมูลไปยังเซิร์ฟเวอร์
         document.getElementById('postStudentForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            const skills = document.getElementById('skills').value;
-            const abilities = document.getElementById('abilities').value;
-            const availability = document.getElementById('availability').value;
+            const skills = document.getElementById('skills').value.trim();
+            const abilities = document.getElementById('abilities').value.trim();
+            const availability = document.getElementById('availability').value.trim();
+
+            // การตรวจสอบข้อมูล
+            if (!skills || !abilities || !availability) {
+                alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+                return;
+            }
 
             try {
                 const response = await fetch('http://localhost:3005/api/postStu/post', {
@@ -75,7 +84,7 @@
                     localStorage.setItem('St_skill', skills);
                     localStorage.setItem('St_ability', abilities);
                     localStorage.setItem('St_work_time', availability);
-                    
+
                     alert('โพสต์สำเร็จ!');
                     window.location.href = '/public/webstudent.html'; // เปลี่ยนเส้นทางเมื่อสำเร็จ
                 }
